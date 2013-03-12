@@ -1,5 +1,6 @@
 package com.github.spocot.kwest;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -41,6 +42,7 @@ public abstract class RobotOutline {
 	}
 	
 	public void render(Graphics g){
-		
+		g.setColor(Color.black);
+		g.fillOval(x, y, 10, 10);
 	}
 }
