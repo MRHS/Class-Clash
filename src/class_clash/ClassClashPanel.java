@@ -20,6 +20,7 @@ public class ClassClashPanel extends RPanel{
 	
 	private void addRobots(){
 		robots.add(new ExampleRobot(0,0));
+		robots.add(new ExampleRobot(100,0));
 		//repeat for all the robots
 	}
 
