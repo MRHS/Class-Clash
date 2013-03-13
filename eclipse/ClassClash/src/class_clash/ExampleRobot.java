@@ -1,7 +1,5 @@
 package class_clash;
 
-import java.util.ArrayList;
-
 public class ExampleRobot extends RobotOutline{
 
 	public ExampleRobot(int x, int y) {
@@ -10,6 +8,5 @@ public class ExampleRobot extends RobotOutline{
 
 	@Override
 	protected void autonomous() {
-		setDirection(Movement.DOWN);
 	}
 }

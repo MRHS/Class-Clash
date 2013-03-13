@@ -13,15 +13,17 @@ public class ClassClashPanel extends RPanel{
 	//Array list of all the robots
 	private ArrayList<RobotOutline> robots = new ArrayList<RobotOutline>();
 	
-	public ClassClashPanel(int pWidth, int pHeight) {
+	//Current arena
+	private Arena arena;
+	
+	public ClassClashPanel(int pWidth, int pHeight, Arena startArena) {
 		super(pWidth, pHeight);
-		addRobots();
+		arena = startArena;
 	}
 	
-	private void addRobots(){
-		robots.add(new ExampleRobot(0,0));
-		robots.add(new ExampleRobot(100,0));
-		//repeat for all the robots
+	
+	protected void addRobots(ArrayList<RobotOutline> robots){
+		this.robots = robots;
 	}
 
 	@Override
