@@ -1,4 +1,4 @@
-package com.github.spocot.kwest;
+package class_clash;
 
 /* The Imagesfile and images are stored in "Images/"
 (the IMAGE_DIR constant).

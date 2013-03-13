@@ -1,4 +1,4 @@
-package com.github.spocot.kwest;
+package class_clash;
 
 /* ImagesPLayer is aimed at displaying the sequence of images
 making up a 'n', 's', or 'g' image file, as loaded by

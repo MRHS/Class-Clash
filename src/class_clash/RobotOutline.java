@@ -1,4 +1,4 @@
-package com.github.spocot.kwest;
+package class_clash;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,11 +23,11 @@ public abstract class RobotOutline {
 	private int xVar = 0;
 	private int yVar = 0;
 	
-	//ArrayList of all other robots
-	private ArrayList<RobotOutline> robots;
+	//Width and height
+	private int width = 10;
+	private int height = 10;
 	
-	public RobotOutline(ArrayList<RobotOutline> robots, int x, int y){
-		this.robots = robots;
+	public RobotOutline(int x, int y){
 		this.x = x;
 		this.y = y;
 	}
@@ -39,10 +39,18 @@ public abstract class RobotOutline {
 	public void update(){
 		x += xVar * speed;
 		y += yVar * speed;
+		autonomous();
+	}
+	
+	public void setDirection(Movement direction){
+		xVar = direction.xVar();
+		yVar = direction.yVar();
 	}
 	
 	public void render(Graphics g){
 		g.setColor(Color.black);
-		g.fillOval(x, y, 10, 10);
+		g.fillRect(x, y, width, height);
 	}
+	
+	protected abstract void autonomous();
 }

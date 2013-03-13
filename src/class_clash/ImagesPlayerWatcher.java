@@ -1,4 +1,4 @@
-package com.github.spocot.kwest;
+package class_clash;
 
 public interface ImagesPlayerWatcher {
 	void sequenceEnded(String imageName);
