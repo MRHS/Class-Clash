@@ -67,8 +67,8 @@
               <children xsi:type="advanced:Placeholder" xmi:id="_yr2SJovhEeKECurydNRylA" elementId="org.eclipse.ui.navigator.ProjectExplorer" toBeRendered="false" ref="_yru9YovhEeKECurydNRylA"/>
               <children xsi:type="advanced:Placeholder" xmi:id="_yr2SJ4vhEeKECurydNRylA" elementId="org.eclipse.jdt.junit.ResultView" toBeRendered="false" ref="_yr1rEIvhEeKECurydNRylA"/>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_yr2SKIvhEeKECurydNRylA" containerData="8513">
-              <children xsi:type="basic:PartSashContainer" xmi:id="_yr2SKYvhEeKECurydNRylA" containerData="7500" horizontal="true">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_yr2SKIvhEeKECurydNRylA" containerData="8513" selectedElement="_yr2SKYvhEeKECurydNRylA">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_yr2SKYvhEeKECurydNRylA" containerData="7500" selectedElement="_yr2SKovhEeKECurydNRylA" horizontal="true">
                 <children xsi:type="advanced:Placeholder" xmi:id="_yr2SKovhEeKECurydNRylA" elementId="org.eclipse.ui.editorss" containerData="7500" ref="_yriwIIvhEeKECurydNRylA"/>
                 <children xsi:type="basic:PartStack" xmi:id="_yr2SK4vhEeKECurydNRylA" elementId="right" containerData="2500" selectedElement="_yr2SLIvhEeKECurydNRylA">
                   <tags>newtablook</tags>
@@ -116,11 +116,16 @@
       <tags>View</tags>
       <tags>categoryTag:Help</tags>
     </sharedElements>
-    <sharedElements xsi:type="advanced:Area" xmi:id="_yriwIIvhEeKECurydNRylA" elementId="org.eclipse.ui.editorss">
-      <children xsi:type="basic:PartStack" xmi:id="_yriwIYvhEeKECurydNRylA" elementId="org.eclipse.e4.primaryDataStack">
+    <sharedElements xsi:type="advanced:Area" xmi:id="_yriwIIvhEeKECurydNRylA" elementId="org.eclipse.ui.editorss" selectedElement="_yriwIYvhEeKECurydNRylA">
+      <children xsi:type="basic:PartStack" xmi:id="_yriwIYvhEeKECurydNRylA" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_BRtIQIviEeK2naHjyop7bg">
         <tags>newtablook</tags>
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
+        <children xsi:type="basic:Part" xmi:id="_BRtIQIviEeK2naHjyop7bg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Test.java" iconURI="platform:/plugin/org.eclipse.jdt.ui//icons/full/obj16/jcu_obj.gif" tooltip="ClassClash/src/class_clash/Test.java" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/ClassClash/src/class_clash/Test.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;331&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>removeOnHide</tags>
+        </children>
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_yrr6EIvhEeKECurydNRylA" elementId="org.eclipse.jdt.ui.PackageExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Package Explorer" iconURI="platform:/plugin/org.eclipse.jdt.ui//icons/full/eview16/package.gif" tooltip="Workspace" closeable="true">
