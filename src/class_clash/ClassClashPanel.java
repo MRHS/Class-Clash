@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class ClassClashPanel extends RPanel{
 	
-	//Index of robot currently performing their turn
+	//Index of player currently performing their turn
 	private int turnIndex = 0;
 	
-	//Array list of all the robots
-	private ArrayList<RobotOutline> robots = new ArrayList<RobotOutline>();
+	//Array list of all the players
+	private ArrayList<Player> players = new ArrayList<Player>();
 	
 	//Current arena
 	private Arena arena;
@@ -22,8 +22,12 @@ public class ClassClashPanel extends RPanel{
 	}
 	
 	
-	protected void addRobots(ArrayList<RobotOutline> robots){
-		this.robots = robots;
+	public void setPlayers(ArrayList<Player> players){
+		this.players = players;
+	}
+	
+	public void addPlayer(Player player){
+		players.add(player);
 	}
 
 	@Override
@@ -52,19 +56,19 @@ public class ClassClashPanel extends RPanel{
 
 	@Override
 	protected void updateGame() {
-		robots.get(turnIndex).update();
+		players.get(turnIndex).update();
 		
 		//Update turn index
 		turnIndex++;
-		if(turnIndex >= robots.size())
+		if(turnIndex >= players.size())
 			turnIndex = 0;
 	}
 
 	@Override
 	protected void drawGame(Graphics g) {
-		//Render all of the robots
-		for(int i = 0; i < robots.size(); i++){
-			robots.get(i).render(g);
+		//Render all of the players
+		for(int i = 0; i < players.size(); i++){
+			players.get(i).render(g);
 		}
 	}
 
