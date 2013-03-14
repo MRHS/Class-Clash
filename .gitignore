@@ -1,3 +1,9 @@
 # Ignore Eclipse metadata
-eclipse/.metadata
+.metadata
+
+# Ignore vim swap files, just incase :)
 *.swp
+
+# Ignore all pre-compiled binaries and directories containing binaries
+*.class
+bin/
