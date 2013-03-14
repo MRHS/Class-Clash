@@ -19,6 +19,8 @@ public class ClassClashPanel extends RPanel{
 	public ClassClashPanel(int pWidth, int pHeight, Arena startArena) {
 		super(pWidth, pHeight);
 		arena = startArena;
+		players.add(new ExamplePlayer(10,10));
+		players.add(new ExamplePlayer(50,10));
 	}
 	
 	

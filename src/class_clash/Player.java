@@ -34,11 +34,10 @@ public abstract class Player {
 	//Number of kills the player has gotten
 	private int kills = 0;
 
-	public Player(int x, int y, Arena startArena){
+	public Player(int x, int y){
 		this.x = x;
 		this.y = y;
 		location = new Location(x,y);
-		arena = startArena;
 	}
 
 	/** Update the player */
