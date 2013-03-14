@@ -9,4 +9,8 @@ public class Arena {
 	public Arena(ArrayList<Player> players){
 		this.players = players;
 	}
+	
+	public boolean addPlayer(Player player) {
+		return this.players.add(player);
+	}
 }
