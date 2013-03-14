@@ -8,7 +8,10 @@ public class ExamplePlayer extends Player{
 
 	@Override
 	protected void runTurn(Arena arena) {
-		
+		//Pseudocode until arena is done
+		/* player.turnTo(arena.getClosestPlayer());
+		 * System.out.println("Winning");
+		 */
 	}
 
 }
