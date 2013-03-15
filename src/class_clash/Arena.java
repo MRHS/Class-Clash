@@ -20,25 +20,6 @@ public class Arena extends RPanel{
 	public boolean addPlayer(Player player) {
 		return this.players.add(player);
 	}
-
-	/** Return player closest to the provided Player */
-	public Player getClosestPlayer(Player player){
-
-		//Closest distance / player
-		int closestDistance = getDistance(player,players.get(0));
-		Player closestPlayer = players.get(0);
-
-		//Calculate closest distance
-		for(int i = 0; i < players.size(); i++){
-			int distance = getDistance(player,players.get(i));
-			if(distance < closestDistance){
-				closestDistance = distance;
-				closestPlayer = players.get(i);
-			}
-		}
-
-		return closestPlayer;
-	}
 	
 	/** Return if a player is at the specified location */
 	public boolean isPlayer(Location location){
@@ -49,17 +30,15 @@ public class Arena extends RPanel{
 		return false;
 	}
 
-	/** Returns the distance between two Player objects */
-	public int getDistance(Player player1, Player player2){
-		Location p1location = player1.getLocation();
-		Location p2location = player2.getLocation();
-		int p1x = p1location.getX();
-		int p1y = p1location.getY();
-		int p2x = p2location.getX();
-		int p2y = p2location.getY();
+	/** Returns the distance between two locations */
+	public int getDistance(Location location1, Location location2){
+		int x1 = location1.getX();
+		int y1 = location1.getY();
+		int x2 = location2.getX();
+		int y2 = location2.getY();
 
 		//Calculate distance
-		return (int)Math.sqrt(Math.pow(p1x - p2x, 2) + Math.pow(p1y - p2y, 2));
+		return (int)Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 	}
 
 	@Override
