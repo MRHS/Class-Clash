@@ -42,31 +42,31 @@ public class Arena extends RPanel{
 	}
 
 	@Override
-	protected void mouseDraggedEvents(MouseEvent e) {
+	public void mouseDraggedEvents(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void mouseMovedEvents(MouseEvent e) {
+	public void mouseMovedEvents(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void keyPressedEvents(KeyEvent e) {
+	public void keyPressedEvents(KeyEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void keyReleasedEvents(KeyEvent e) {
+	public void keyReleasedEvents(KeyEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void updateGame() {
+	public void updateGame() {
 		players.get(turnIndex).update();
 
 		//Update turn index
@@ -76,7 +76,7 @@ public class Arena extends RPanel{
 	}
 
 	@Override
-	protected void drawGame(Graphics g) {
+	public void drawGame(Graphics g) {
 		//Render all of the players
 		for(int i = 0; i < players.size(); i++){
 			players.get(i).render(g);

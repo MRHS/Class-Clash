@@ -15,44 +15,44 @@ import javax.swing.JPanel;
 public abstract class RPanel extends JPanel implements Runnable{
 
 	//Desired FPS
-	protected int fps;
+	private int fps;
 	
 	//Ideal sleep time (ms)
-	protected long period;
+	private long period;
 
 	//Default background color
-	protected final Color DBACKGROUND = Color.white;
+	private final Color DBACKGROUND = Color.white;
 
 	//Background color variable
-	protected Color pBackground;
+	private Color pBackground;
 
 	//Default height and width
-	protected final int DWIDTH = 500;
-	protected final int DHEIGHT = 400;
+	private final int DWIDTH = 500;
+	private final int DHEIGHT = 400;
 
 	//Height and width variables
-	protected int pWidth;
-	protected int pHeight;
+	private int pWidth;
+	private int pHeight;
 
 	//Animator thread
-	protected Thread animator;
+	private Thread animator;
 
 	//Number of frames with a delay of 0ms before the animation thread yields to other running threads
-	protected static final int NO_DELAYS_PER_YIELD = 16;
+	private static final int NO_DELAYS_PER_YIELD = 16;
 
 	//Number of frames that can be skipped in any one animation loop
-	protected static final int MAX_FRAME_SKIPS = 5;
+	private static final int MAX_FRAME_SKIPS = 5;
 
 	//Boolean variable for pausing
-	protected volatile boolean isPaused = false;
+	private volatile boolean isPaused = false;
 
 	//Boolean variables for game termination
-	protected volatile boolean running;
-	protected volatile boolean gameOver;
+	private volatile boolean running;
+	private volatile boolean gameOver;
 
 	//Variables for off-screen rendering
-	protected Graphics g;
-	protected Image img = null;
+	private Graphics g;
+	private Image img = null;
 	
 	public RPanel(int pWidth, int pHeight){
 		fps = 40;
@@ -85,7 +85,7 @@ public abstract class RPanel extends JPanel implements Runnable{
 	}
 
 	/** Handles key events */
-	protected void addKeys(){
+	private void addKeys(){
 		addKeyListener(new KeyAdapter(){
 			public void keyPressed(KeyEvent e){
 				keyPressedEvents(e);
@@ -97,7 +97,7 @@ public abstract class RPanel extends JPanel implements Runnable{
 	}
 	
 	/** Handles Mouse Events */
-	protected void addMouse(){
+	private void addMouse(){
 		addMouseMotionListener(new MouseMotionListener(){
 			public void mouseDragged(MouseEvent arg0) {
 				mouseDraggedEvents(arg0);
@@ -108,14 +108,14 @@ public abstract class RPanel extends JPanel implements Runnable{
 		});
 	}
 	
-	protected abstract void mouseDraggedEvents(MouseEvent e);
-	protected abstract void mouseMovedEvents(MouseEvent e);
+	public abstract void mouseDraggedEvents(MouseEvent e);
+	public abstract void mouseMovedEvents(MouseEvent e);
 	
-	protected abstract void keyPressedEvents(KeyEvent e);
-	protected abstract void keyReleasedEvents(KeyEvent e);
+	public abstract void keyPressedEvents(KeyEvent e);
+	public abstract void keyReleasedEvents(KeyEvent e);
 
 	/** Initialize and start the game thread */
-	protected void startGame(){
+	private void startGame(){
 		if(animator == null || !running){
 			animator = new Thread(this);
 			animator.start();
@@ -193,7 +193,7 @@ public abstract class RPanel extends JPanel implements Runnable{
 	}
 
 	/** Draw buffer to screen */
-	protected void paintScreen(){
+	private void paintScreen(){
 		Graphics graphics;
 		try{
 			graphics = this.getGraphics();
@@ -208,17 +208,17 @@ public abstract class RPanel extends JPanel implements Runnable{
 	}
 
 	/** Update game state(s) */
-	protected void gameUpdate(){
+	private void gameUpdate(){
 		if(!isPaused && !gameOver){
 			updateGame();
 		}
 	}
 	
 	/** Update the specific game components */
-	protected abstract void updateGame();
+	public abstract void updateGame();
 
 	/** Draw the current frame to an image buffer */
-	protected void gameRender(){
+	private void gameRender(){
 		if(img == null){
 			//Create buffer
 			img = createImage(pWidth, pHeight);
@@ -239,5 +239,5 @@ public abstract class RPanel extends JPanel implements Runnable{
 	}
 	
 	/** Draw the specific game components */
-	protected abstract void drawGame(Graphics g);
+	public abstract void drawGame(Graphics g);
 }
