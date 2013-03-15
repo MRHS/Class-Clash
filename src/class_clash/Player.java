@@ -83,10 +83,9 @@ public abstract class Player {
 	}
 
 	/** Turn to face the target player */
-	public void turnTo(Player player){
-		Location plyrLocation = player.getLocation();
-		int plyrX = plyrLocation.getX();
-		int plyrY = plyrLocation.getY();
+	public void turnTo(Location location){
+		int plyrX = location.getX();
+		int plyrY = location.getY();
 		
 		boolean toLeft = false;
 		boolean toRight = false;
