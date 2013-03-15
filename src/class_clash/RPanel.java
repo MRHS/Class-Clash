@@ -238,6 +238,16 @@ public abstract class RPanel extends JPanel implements Runnable{
 		drawGame(g);
 	}
 	
+	/** Return panel width */
+	public int getWidth(){
+		return pWidth;
+	}
+	
+	/** Return panel height */
+	public int getHeight(){
+		return pHeight;
+	}
+	
 	/** Draw the specific game components */
 	public abstract void drawGame(Graphics g);
 }

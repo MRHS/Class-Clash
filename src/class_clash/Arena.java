@@ -30,6 +30,11 @@ public class Arena extends RPanel{
 		}
 		return false;
 	}
+	
+	/** Return if the location is at or beyond the border */
+	public boolean isBorder(Location location){
+		
+	}
 
 	/** Returns the distance between two locations */
 	public int getDistance(Location location1, Location location2){
