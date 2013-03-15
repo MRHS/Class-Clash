@@ -15,6 +15,7 @@ public class Arena extends RPanel{
 
 	public Arena(int pWidth, int pHeight, ArrayList<Player> players) {
 		super(pWidth, pHeight);
+		this.players = players;
 	}
 
 	public boolean addPlayer(Player player) {
