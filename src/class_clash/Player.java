@@ -68,6 +68,16 @@ public abstract class Player {
 	public int getHealth(){
 		return life;
 	}
+	
+	/** Reduces a player's life by a certain amnt */
+	public void takeDmg(int amnt){
+		life -= amnt <= 0 ? 0 : amnt;
+	}
+	
+	/** Sets a player's life */
+	public void setLife(int life){
+		this.life = life;
+	}
 
 	/** Get player's current location */
 	public Location getLocation(){
@@ -75,7 +85,10 @@ public abstract class Player {
 	}
 	
 	/** Return the number of kills the player has */
-
+	public int getKills(){
+		return kills;
+	}
+	
 	/** Render the player */
 	public void render(Graphics g){
 		g.setColor(Color.black);
