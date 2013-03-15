@@ -12,9 +12,6 @@ public abstract class Player {
 	//Movement speed of the Player
 	private int speed = 1;
 
-	//Name of the Player
-	private String name;
-
 	//Coords for Player
 	private int x;
 	private int y;
