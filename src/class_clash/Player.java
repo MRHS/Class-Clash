@@ -78,6 +78,11 @@ public abstract class Player {
 	public void setLife(int life){
 		this.life = life;
 	}
+	
+	/** Heals a player by a specific amnt */
+	public void healPlayer(int amnt){
+		life += amnt <= 0 ? 0 : amnt;
+	}
 
 	/** Get player's current location */
 	public Location getLocation(){
