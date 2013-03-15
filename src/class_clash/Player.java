@@ -73,6 +73,8 @@ public abstract class Player {
 	public Location getLocation(){
 		return location;
 	}
+	
+	/** Return the number of kills the player has */
 
 	/** Render the player */
 	public void render(Graphics g){
@@ -85,7 +87,7 @@ public abstract class Player {
 		Location plyrLocation = player.getLocation();
 		int plyrX = plyrLocation.getX();
 		int plyrY = plyrLocation.getY();
-
+		
 		boolean toLeft = false;
 		boolean toRight = false;
 		boolean above = false;

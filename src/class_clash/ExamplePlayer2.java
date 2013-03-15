@@ -10,5 +10,4 @@ public class ExamplePlayer2 extends Player{
 	protected void runTurn(Arena arena) {
 		setDirection(Direction.SOUTH_WEST);
 	}
-
 }
