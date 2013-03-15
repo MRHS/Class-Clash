@@ -33,7 +33,13 @@ public class Arena extends RPanel{
 	
 	/** Return if the location is at or beyond the border */
 	public boolean isBorder(Location location){
-		
+		int width = getWidth();
+		int height = getHeight();
+		int x = location.getX();
+		int y = location.getY();
+		if(x <= 0 || x >= width || y <= 0 || y >= height)
+			return true;
+		return false;
 	}
 
 	/** Returns the distance between two locations */
