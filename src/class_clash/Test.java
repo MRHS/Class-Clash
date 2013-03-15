@@ -12,7 +12,7 @@ public class Test {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new ExamplePlayer(10,10));
 		players.add(new ExamplePlayer(50,10));
-		ClassClashPanel panel = new ClassClashPanel(500,400,new Arena(players));
+		Arena panel = new Arena(500,400,players);
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
