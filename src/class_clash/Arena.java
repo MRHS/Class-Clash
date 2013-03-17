@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class Arena extends RPanel{
+public class Arena extends RPanel {
 
 	//Index of player currently performing their turn
 	private int turnIndex = 0;
@@ -23,8 +23,8 @@ public class Arena extends RPanel{
 	}
 	
 	/** Return if a player is at the specified location */
-	public boolean isPlayer(Location location){
-		for(int i = 0; i < players.size(); i++){
+	public boolean isPlayer(Location location) {
+		for(int i = 0; i < players.size(); i++) {
 			if(players.get(i).getLocation().equals(location))
 				return true;
 		}
@@ -32,7 +32,7 @@ public class Arena extends RPanel{
 	}
 	
 	/** Return if the location is at or beyond the border */
-	public boolean isBorder(Location location){
+	public boolean isBorder(Location location) {
 		int width = getWidth();
 		int height = getHeight();
 		int x = location.getX();
@@ -43,7 +43,7 @@ public class Arena extends RPanel{
 	}
 
 	/** Returns the distance between two locations */
-	public int getDistance(Location location1, Location location2){
+	public int getDistance(Location location1, Location location2) {
 		int x1 = location1.getX();
 		int y1 = location1.getY();
 		int x2 = location2.getX();
@@ -90,7 +90,7 @@ public class Arena extends RPanel{
 	@Override
 	public void drawGame(Graphics g) {
 		//Render all of the players
-		for(int i = 0; i < players.size(); i++){
+		for(int i = 0; i < players.size(); i++) {
 			players.get(i).render(g);
 		}
 	}

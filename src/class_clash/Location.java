@@ -7,24 +7,24 @@ public class Location {
 	private int y;
 	
 	//Constructor
-	public Location(int x, int y){
+	public Location(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
 	//Update a location
-	public void update(int x, int y){
+	public void update(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
 	/** Return the X-coord of the location */
-	public int getX(){
+	public int getX() {
 		return x;
 	}
 	
 	/** Return the Y-coord of the location */
-	public int getY(){
+	public int getY() {
 		return y;
 	}
 }

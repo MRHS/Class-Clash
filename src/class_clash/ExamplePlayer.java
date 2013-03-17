@@ -1,6 +1,6 @@
 package class_clash;
 
-public class ExamplePlayer extends Player{
+public class ExamplePlayer extends Player {
 
 	public ExamplePlayer(int x, int y) {
 		super(x, y);

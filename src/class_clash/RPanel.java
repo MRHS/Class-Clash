@@ -12,7 +12,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
-public abstract class RPanel extends JPanel implements Runnable{
+public abstract class RPanel extends JPanel implements Runnable {
 
 	//Desired FPS
 	private int fps;
@@ -54,7 +54,7 @@ public abstract class RPanel extends JPanel implements Runnable{
 	private Graphics g;
 	private Image img = null;
 	
-	public RPanel(int pWidth, int pHeight){
+	public RPanel(int pWidth, int pHeight) {
 		fps = 40;
 		calculatePeriod(fps);
 		this.pWidth = pWidth;
@@ -69,36 +69,36 @@ public abstract class RPanel extends JPanel implements Runnable{
 	}
 	
 	/** Change the background color */
-	public void setColor(Color color){
+	public void setColor(Color color) {
 		pBackground = color;
 	}
 	
 	/** Calculates the period */
-	public void calculatePeriod(int FPS){
+	public void calculatePeriod(int FPS) {
 		period = 1000000000L / FPS;
 	}
 
 	/** Wait for panel to be added to frame/applet before starting the game */
-	public void addNotify(){
+	public void addNotify() {
 		super.addNotify();
 		startGame();
 	}
 
 	/** Handles key events */
-	private void addKeys(){
-		addKeyListener(new KeyAdapter(){
-			public void keyPressed(KeyEvent e){
+	private void addKeys() {
+		addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
 				keyPressedEvents(e);
 			}
-			public void keyReleased(KeyEvent e){
+			public void keyReleased(KeyEvent e) {
 				keyReleasedEvents(e);
 			}
 		});
 	}
 	
 	/** Handles Mouse Events */
-	private void addMouse(){
-		addMouseMotionListener(new MouseMotionListener(){
+	private void addMouse() {
+		addMouseMotionListener(new MouseMotionListener() {
 			public void mouseDragged(MouseEvent arg0) {
 				mouseDraggedEvents(arg0);
 			}
@@ -115,25 +115,25 @@ public abstract class RPanel extends JPanel implements Runnable{
 	public abstract void keyReleasedEvents(KeyEvent e);
 
 	/** Initialize and start the game thread */
-	private void startGame(){
-		if(animator == null || !running){
+	private void startGame() {
+		if(animator == null || !running) {
 			animator = new Thread(this);
 			animator.start();
 		}
 	}
 
 	/** Called to pause the game */
-	public void pauseGame(){
+	public void pauseGame() {
 		isPaused = true;
 	}
 
 	/** Called to resume the game */
-	public void resumeGame(){
+	public void resumeGame() {
 		isPaused = false;
 	}
 
 	/** Stops the thread */
-	public void stopGame(){
+	public void stopGame() {
 		running = false;
 	}
 
@@ -148,7 +148,7 @@ public abstract class RPanel extends JPanel implements Runnable{
 		beforeTime = System.nanoTime();
 
 		running = true;
-		while(running){
+		while(running) {
 
 			//Update game state
 			gameUpdate();
@@ -164,16 +164,18 @@ public abstract class RPanel extends JPanel implements Runnable{
 			timeDiff = afterTime - beforeTime;
 			sleepTime = (period - timeDiff) - overSleepTime;
 
-			if(sleepTime > 0){
+			if(sleepTime > 0) {
 				try{
 					Thread.sleep(sleepTime/1000000L);
-				}catch(InterruptedException e){}
+				} catch(InterruptedException e) {
+					// TODO: Handle this exception
+				}
 				overSleepTime = (System.nanoTime() - afterTime) - sleepTime;
 			}else{
 				excess -= sleepTime;
 				overSleepTime = 0L;
 
-				if(++noDelays >= NO_DELAYS_PER_YIELD){
+				if(++noDelays >= NO_DELAYS_PER_YIELD) {
 					Thread.yield();
 					noDelays = 0;
 				}
@@ -183,7 +185,7 @@ public abstract class RPanel extends JPanel implements Runnable{
 
 			//Update game state without rendering if frame animation is taking too long
 			int skips = 0;
-			while((excess > period) && (skips < MAX_FRAME_SKIPS)){
+			while((excess > period) && (skips < MAX_FRAME_SKIPS)) {
 				excess -= period;
 				gameUpdate();
 				skips++;
@@ -193,23 +195,24 @@ public abstract class RPanel extends JPanel implements Runnable{
 	}
 
 	/** Draw buffer to screen */
-	private void paintScreen(){
+	private void paintScreen() {
 		Graphics graphics;
-		try{
+		try {
 			graphics = this.getGraphics();
 			if((graphics != null) && (img != null))
 				graphics.drawImage(img,0,0,null);
 			//Sync the display for consistency across systems
 			Toolkit.getDefaultToolkit().sync();
 			graphics.dispose();
-		}catch(Exception e){
+		} catch(Exception e) {
+			
 			System.out.println("Graphics context error: " + e);
 		}
 	}
 
 	/** Update game state(s) */
-	private void gameUpdate(){
-		if(!isPaused && !gameOver){
+	private void gameUpdate() {
+		if(!isPaused && !gameOver) {
 			updateGame();
 		}
 	}
@@ -218,11 +221,11 @@ public abstract class RPanel extends JPanel implements Runnable{
 	public abstract void updateGame();
 
 	/** Draw the current frame to an image buffer */
-	private void gameRender(){
-		if(img == null){
+	private void gameRender() {
+		if(img == null) {
 			//Create buffer
 			img = createImage(pWidth, pHeight);
-			if(img == null){
+			if(img == null) {
 				System.out.println("Buffer is null");
 				return;
 			}else{
@@ -239,12 +242,12 @@ public abstract class RPanel extends JPanel implements Runnable{
 	}
 	
 	/** Return panel width */
-	public int getWidth(){
+	public int getWidth() {
 		return pWidth;
 	}
 	
 	/** Return panel height */
-	public int getHeight(){
+	public int getHeight() {
 		return pHeight;
 	}
 	

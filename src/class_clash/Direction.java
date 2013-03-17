@@ -14,16 +14,16 @@ public enum Direction {
 	private int xVar;
 	private int yVar;
 	
-	private Direction(int xVar, int yVar){
+	private Direction(int xVar, int yVar) {
 		this.xVar = xVar;
 		this.yVar = yVar;
 	}
 	
-	public int xVar(){
+	public int xVar() {
 		return xVar;
 	}
 	
-	public int yVar(){
+	public int yVar() {
 		return yVar;
 	}
 }

@@ -31,14 +31,14 @@ public abstract class Player {
 	//Number of kills the player has gotten
 	private int kills = 0;
 
-	public Player(int x, int y){
+	public Player(int x, int y) {
 		this.x = x;
 		this.y = y;
 		location = new Location(x,y);
 	}
 
 	/** Update the player */
-	public void update(){
+	public void update() {
 		x += xVar * speed;
 		y += yVar * speed;
 		location.update(x, y);
@@ -46,59 +46,59 @@ public abstract class Player {
 	}
 
 	/** Sets the arena that the player is in */
-	public void setArena(Arena arena){
+	public void setArena(Arena arena) {
 		this.arena = arena;
 	}
 
 	/** Adds a kill */
-	public void killConfirmed(){
+	public void killConfirmed() {
 		kills++;
 	}
 
 	/** Sets direction that the robot should move */
-	public void setDirection(Direction direction){
+	public void setDirection(Direction direction) {
 		xVar = direction.xVar();
 		yVar = direction.yVar();
 	}
 
 	/** Returns the player's current health */
-	public int getHealth(){
+	public int getHealth() {
 		return life;
 	}
 	
 	/** Reduces a player's life by a certain amnt */
-	public void takeDmg(int amnt){
+	public void takeDmg(int amnt) {
 		life -= amnt <= 0 ? 0 : amnt;
 	}
 	
 	/** Sets a player's life */
-	public void setLife(int life){
+	public void setLife(int life) {
 		this.life = life;
 	}
 	
 	/** Heals a player by a specific amnt */
-	public void healPlayer(int amnt){
+	public void healPlayer(int amnt) {
 		life += amnt <= 0 ? 0 : amnt;
 	}
 
 	/** Get player's current location */
-	public Location getLocation(){
+	public Location getLocation() {
 		return location;
 	}
 	
 	/** Return the number of kills the player has */
-	public int getKills(){
+	public int getKills() {
 		return kills;
 	}
 	
 	/** Render the player */
-	public void render(Graphics g){
+	public void render(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(x, y, width, height);
 	}
 
 	/** Turn to face the target player */
-	public void turnTo(Location location){
+	public void turnTo(Location location) {
 		int plyrX = location.getX();
 		int plyrY = location.getY();
 		
@@ -108,33 +108,40 @@ public abstract class Player {
 		boolean below = false;
 
 		//Calculate direction from current location
-		if(plyrX > x)
+		if(plyrX > x) {
 			toRight = true;
-		else if(plyrX < x)
+		} else if(plyrX < x) {
 			toLeft = true;
-		if(plyrY > y)
+		}
+		
+		if(plyrY > y) {
 			above = true;
-		else if(plyrY < y)
+		} else if(plyrY < y) {
 			below = true;
+		}
 
 		//Use booleans to get direction
 		Direction direction;
-		if(toLeft)
-			if(above)
+		
+		if(toLeft) {
+			if(above) {
 				direction = Direction.NORTH_WEST;
-			else if(below)
+			} else if(below) {
 				direction = Direction.SOUTH_WEST;
-			else
+			} else {
 				direction = Direction.WEST;
-		else if(toRight)
-			if(above)
+			}
+		} else if(toRight) {
+			if(above) {
 				direction = Direction.NORTH_EAST;
-			else if(below)
+			} else if(below) {
 				direction = Direction.SOUTH_EAST;
-			else
+			} else {
 				direction = Direction.EAST;
-		else
+			}
+		} else {
 			direction = Direction.NEUTRAL;
+		}
 		
 		//Set the new direction
 		setDirection(direction);
