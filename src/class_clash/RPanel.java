@@ -14,243 +14,258 @@ import javax.swing.JPanel;
 
 public abstract class RPanel extends JPanel implements Runnable {
 
-	//Desired FPS
-	private int fps;
-	
-	//Ideal sleep time (ms)
-	private long period;
+    // Desired FPS
+    private final int fps;
 
-	//Default background color
-	private final Color DBACKGROUND = Color.white;
+    // Ideal sleep time (ms)
+    private long period;
 
-	//Background color variable
-	private Color pBackground;
+    // Default background color
+    private final Color DBACKGROUND = Color.white;
 
-	//Default height and width
-	private final int DWIDTH = 500;
-	private final int DHEIGHT = 400;
+    // Background color variable
+    private Color pBackground;
 
-	//Height and width variables
-	private int pWidth;
-	private int pHeight;
+    // Default height and width
+    private final int DWIDTH = 500;
+    private final int DHEIGHT = 400;
 
-	//Animator thread
-	private Thread animator;
+    // Height and width variables
+    private final int pWidth;
+    private final int pHeight;
 
-	//Number of frames with a delay of 0ms before the animation thread yields to other running threads
-	private static final int NO_DELAYS_PER_YIELD = 16;
+    // Animator thread
+    private Thread animator;
 
-	//Number of frames that can be skipped in any one animation loop
-	private static final int MAX_FRAME_SKIPS = 5;
+    // Number of frames with a delay of 0ms before the animation thread yields
+    // to other running threads
+    private static final int NO_DELAYS_PER_YIELD = 16;
 
-	//Boolean variable for pausing
-	private volatile boolean isPaused = false;
+    // Number of frames that can be skipped in any one animation loop
+    private static final int MAX_FRAME_SKIPS = 5;
 
-	//Boolean variables for game termination
-	private volatile boolean running;
-	private volatile boolean gameOver;
+    // Boolean variable for pausing
+    private volatile boolean isPaused = false;
 
-	//Variables for off-screen rendering
-	private Graphics g;
-	private Image img = null;
-	
-	public RPanel(int pWidth, int pHeight) {
-		fps = 40;
-		calculatePeriod(fps);
-		this.pWidth = pWidth;
-		this.pHeight = pHeight;
-		pBackground = DBACKGROUND;
-		setBackground(pBackground);
-		setPreferredSize(new Dimension(pWidth, pHeight));
-		setFocusable(true);
-		requestFocus();
-		addKeys();
-		addMouse();
-	}
-	
-	/** Change the background color */
-	public void setColor(Color color) {
-		pBackground = color;
-	}
-	
-	/** Calculates the period */
-	public void calculatePeriod(int FPS) {
-		period = 1000000000L / FPS;
-	}
+    // Boolean variables for game termination
+    private volatile boolean running;
+    private volatile boolean gameOver;
 
-	/** Wait for panel to be added to frame/applet before starting the game */
-	public void addNotify() {
-		super.addNotify();
-		startGame();
-	}
+    // Variables for off-screen rendering
+    private Graphics g;
+    private Image img = null;
 
-	/** Handles key events */
-	private void addKeys() {
-		addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) {
-				keyPressedEvents(e);
-			}
-			public void keyReleased(KeyEvent e) {
-				keyReleasedEvents(e);
-			}
-		});
-	}
-	
-	/** Handles Mouse Events */
-	private void addMouse() {
-		addMouseMotionListener(new MouseMotionListener() {
-			public void mouseDragged(MouseEvent arg0) {
-				mouseDraggedEvents(arg0);
-			}
-			public void mouseMoved(MouseEvent arg0) {
-				mouseMovedEvents(arg0);
-			}
-		});
-	}
-	
-	public abstract void mouseDraggedEvents(MouseEvent e);
-	public abstract void mouseMovedEvents(MouseEvent e);
-	
-	public abstract void keyPressedEvents(KeyEvent e);
-	public abstract void keyReleasedEvents(KeyEvent e);
+    public RPanel(int pWidth, int pHeight) {
+        fps = 40;
+        calculatePeriod(fps);
+        this.pWidth = pWidth;
+        this.pHeight = pHeight;
+        pBackground = DBACKGROUND;
+        setBackground(pBackground);
+        setPreferredSize(new Dimension(pWidth, pHeight));
+        setFocusable(true);
+        requestFocus();
+        addKeys();
+        addMouse();
+    }
 
-	/** Initialize and start the game thread */
-	private void startGame() {
-		if(animator == null || !running) {
-			animator = new Thread(this);
-			animator.start();
-		}
-	}
+    /** Change the background color */
+    public void setColor(Color color) {
+        pBackground = color;
+    }
 
-	/** Called to pause the game */
-	public void pauseGame() {
-		isPaused = true;
-	}
+    /** Calculates the period */
+    public void calculatePeriod(int FPS) {
+        period = 1000000000L / FPS;
+    }
 
-	/** Called to resume the game */
-	public void resumeGame() {
-		isPaused = false;
-	}
+    /** Wait for panel to be added to frame/applet before starting the game */
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        startGame();
+    }
 
-	/** Stops the thread */
-	public void stopGame() {
-		running = false;
-	}
+    /** Handles key events */
+    private void addKeys() {
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                keyPressedEvents(e);
+            }
 
-	/** Update, render, sleep */
-	public void run() {
-		long beforeTime, afterTime, timeDiff, sleepTime;
-		long overSleepTime = 0L;
-		int noDelays = 0;
-		long excess = 0L;
+            @Override
+            public void keyReleased(KeyEvent e) {
+                keyReleasedEvents(e);
+            }
+        });
+    }
 
-		//Get time before running
-		beforeTime = System.nanoTime();
+    /** Handles Mouse Events */
+    private void addMouse() {
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent arg0) {
+                mouseDraggedEvents(arg0);
+            }
 
-		running = true;
-		while(running) {
+            @Override
+            public void mouseMoved(MouseEvent arg0) {
+                mouseMovedEvents(arg0);
+            }
+        });
+    }
 
-			//Update game state
-			gameUpdate();
+    public abstract void mouseDraggedEvents(MouseEvent e);
 
-			//Render to a buffer
-			gameRender();
+    public abstract void mouseMovedEvents(MouseEvent e);
 
-			//Draw buffer to screen
-			paintScreen();
+    public abstract void keyPressedEvents(KeyEvent e);
 
-			//Get time after updating and rendering
-			afterTime = System.nanoTime();
-			timeDiff = afterTime - beforeTime;
-			sleepTime = (period - timeDiff) - overSleepTime;
+    public abstract void keyReleasedEvents(KeyEvent e);
 
-			if(sleepTime > 0) {
-				try{
-					Thread.sleep(sleepTime/1000000L);
-				} catch(InterruptedException e) {
-					// TODO: Handle this exception
-				}
-				overSleepTime = (System.nanoTime() - afterTime) - sleepTime;
-			}else{
-				excess -= sleepTime;
-				overSleepTime = 0L;
+    /** Initialize and start the game thread */
+    private void startGame() {
+        if (animator == null || !running) {
+            animator = new Thread(this);
+            animator.start();
+        }
+    }
 
-				if(++noDelays >= NO_DELAYS_PER_YIELD) {
-					Thread.yield();
-					noDelays = 0;
-				}
-			}
+    /** Called to pause the game */
+    public void pauseGame() {
+        isPaused = true;
+    }
 
-			beforeTime = System.nanoTime();
+    /** Called to resume the game */
+    public void resumeGame() {
+        isPaused = false;
+    }
 
-			//Update game state without rendering if frame animation is taking too long
-			int skips = 0;
-			while((excess > period) && (skips < MAX_FRAME_SKIPS)) {
-				excess -= period;
-				gameUpdate();
-				skips++;
-			}
-		}
-		System.exit(0);
-	}
+    /** Stops the thread */
+    public void stopGame() {
+        running = false;
+    }
 
-	/** Draw buffer to screen */
-	private void paintScreen() {
-		Graphics graphics;
-		try {
-			graphics = this.getGraphics();
-			if((graphics != null) && (img != null))
-				graphics.drawImage(img,0,0,null);
-			//Sync the display for consistency across systems
-			Toolkit.getDefaultToolkit().sync();
-			graphics.dispose();
-		} catch(Exception e) {
-			
-			System.out.println("Graphics context error: " + e);
-		}
-	}
+    /** Update, render, sleep */
+    @Override
+    public void run() {
+        long beforeTime, afterTime, timeDiff, sleepTime;
+        long overSleepTime = 0L;
+        int noDelays = 0;
+        long excess = 0L;
 
-	/** Update game state(s) */
-	private void gameUpdate() {
-		if(!isPaused && !gameOver) {
-			updateGame();
-		}
-	}
-	
-	/** Update the specific game components */
-	public abstract void updateGame();
+        // Get time before running
+        beforeTime = System.nanoTime();
 
-	/** Draw the current frame to an image buffer */
-	private void gameRender() {
-		if(img == null) {
-			//Create buffer
-			img = createImage(pWidth, pHeight);
-			if(img == null) {
-				System.out.println("Buffer is null");
-				return;
-			}else{
-				g = img.getGraphics();
-			}
-		}
+        running = true;
+        while (running) {
 
-		//Clear the background
-		g.setColor(pBackground);
-		g.fillRect(0,0,pWidth,pHeight);
-		
-		//Draw game components
-		drawGame(g);
-	}
-	
-	/** Return panel width */
-	public int getWidth() {
-		return pWidth;
-	}
-	
-	/** Return panel height */
-	public int getHeight() {
-		return pHeight;
-	}
-	
-	/** Draw the specific game components */
-	public abstract void drawGame(Graphics g);
+            // Update game state
+            gameUpdate();
+
+            // Render to a buffer
+            gameRender();
+
+            // Draw buffer to screen
+            paintScreen();
+
+            // Get time after updating and rendering
+            afterTime = System.nanoTime();
+            timeDiff = afterTime - beforeTime;
+            sleepTime = (period - timeDiff) - overSleepTime;
+
+            if (sleepTime > 0) {
+                try {
+                    Thread.sleep(sleepTime / 1000000L);
+                } catch (InterruptedException e) {
+                    // TODO: Handle this exception
+                }
+                overSleepTime = (System.nanoTime() - afterTime) - sleepTime;
+            } else {
+                excess -= sleepTime;
+                overSleepTime = 0L;
+
+                if (++noDelays >= NO_DELAYS_PER_YIELD) {
+                    Thread.yield();
+                    noDelays = 0;
+                }
+            }
+
+            beforeTime = System.nanoTime();
+
+            // Update game state without rendering if frame animation is taking
+            // too long
+            int skips = 0;
+            while ((excess > period) && (skips < MAX_FRAME_SKIPS)) {
+                excess -= period;
+                gameUpdate();
+                skips++;
+            }
+        }
+        System.exit(0);
+    }
+
+    /** Draw buffer to screen */
+    private void paintScreen() {
+        Graphics graphics;
+        try {
+            graphics = this.getGraphics();
+            if ((graphics != null) && (img != null)) {
+                graphics.drawImage(img, 0, 0, null);
+            }
+            // Sync the display for consistency across systems
+            Toolkit.getDefaultToolkit().sync();
+            graphics.dispose();
+        } catch (Exception e) {
+
+            System.out.println("Graphics context error: " + e);
+        }
+    }
+
+    /** Update game state(s) */
+    private void gameUpdate() {
+        if (!isPaused && !gameOver) {
+            updateGame();
+        }
+    }
+
+    /** Update the specific game components */
+    public abstract void updateGame();
+
+    /** Draw the current frame to an image buffer */
+    private void gameRender() {
+        if (img == null) {
+            // Create buffer
+            img = createImage(pWidth, pHeight);
+            if (img == null) {
+                System.out.println("Buffer is null");
+                return;
+            } else {
+                g = img.getGraphics();
+            }
+        }
+
+        // Clear the background
+        g.setColor(pBackground);
+        g.fillRect(0, 0, pWidth, pHeight);
+
+        // Draw game components
+        drawGame(g);
+    }
+
+    /** Return panel width */
+    @Override
+    public int getWidth() {
+        return pWidth;
+    }
+
+    /** Return panel height */
+    @Override
+    public int getHeight() {
+        return pHeight;
+    }
+
+    /** Draw the specific game components */
+    public abstract void drawGame(Graphics g);
 }
