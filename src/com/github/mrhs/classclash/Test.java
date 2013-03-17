@@ -1,4 +1,4 @@
-package class_clash;
+package com.github.mrhs.classclash;
 
 import java.util.ArrayList;
 

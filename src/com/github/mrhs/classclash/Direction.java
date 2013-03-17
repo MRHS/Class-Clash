@@ -1,4 +1,4 @@
-package class_clash;
+package com.github.mrhs.classclash;
 
 public enum Direction {
     NEUTRAL(0, 0),
