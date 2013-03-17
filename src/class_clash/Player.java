@@ -65,9 +65,11 @@ public abstract class Player {
         return life;
     }
 
-    /** Reduces a player's life by a certain amnt */
-    public void takeDmg(int amnt) {
-        life -= amnt <= 0 ? 0 : amnt;
+    /** Reduces a player's life by a certain amount */
+    public void takeDamage(int amount) {
+        if (amount > 0) {
+            this.life -= amount;
+        }
     }
 
     /** Sets a player's life */
@@ -75,9 +77,11 @@ public abstract class Player {
         this.life = life;
     }
 
-    /** Heals a player by a specific amnt */
-    public void healPlayer(int amnt) {
-        life += amnt <= 0 ? 0 : amnt;
+    /** Heals a player by a specific amount */
+    public void healPlayer(int amount) {
+        if (amount > 0) {
+            this.life += amount;
+        }
     }
 
     /** Get player's current location */

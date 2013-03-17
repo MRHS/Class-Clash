@@ -11,15 +11,20 @@ public class Arena extends RPanel {
     private int turnIndex = 0;
 
     // ArrayList containing all of the players
-    private final ArrayList<Player> players;
+    private final ArrayList<Player> players = new ArrayList<Player>();
 
-    public Arena(int pWidth, int pHeight, ArrayList<Player> players) {
+    public Arena(int pWidth, int pHeight) {
         super(pWidth, pHeight);
-        this.players = players;
     }
 
-    public boolean addPlayer(Player player) {
-        return this.players.add(player);
+    /**
+     * Adds a player to the arena.
+     * 
+     * @param player
+     *        The player to add
+     */
+    public void addPlayer(Player player) {
+        this.players.add(player);
     }
 
     /** Return if a player is at the specified location */

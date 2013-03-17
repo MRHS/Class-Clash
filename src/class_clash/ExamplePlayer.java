@@ -7,7 +7,7 @@ public class ExamplePlayer extends Player {
     }
 
     @Override
-    protected void runTurn(Arena arena) {
+    protected final void runTurn(Arena arena) {
         setDirection(Direction.SOUTH_EAST);
     }
 

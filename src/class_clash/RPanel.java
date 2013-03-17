@@ -24,22 +24,22 @@ public abstract class RPanel extends JPanel implements Runnable {
     private final Color DBACKGROUND = Color.white;
 
     // Background color variable
-    private Color pBackground;
+    private Color panelBackground;
 
     // Default height and width
-    private final int DWIDTH = 500;
-    private final int DHEIGHT = 400;
+    private final int DEFAULT_WIDTH = 500;
+    private final int DEFAULT_HEIGHT = 400;
 
     // Height and width variables
-    private final int pWidth;
-    private final int pHeight;
+    private final int panelWidth;
+    private final int panelHeight;
 
     // Animator thread
     private Thread animator;
 
     // Number of frames with a delay of 0ms before the animation thread yields
     // to other running threads
-    private static final int NO_DELAYS_PER_YIELD = 16;
+    private static final int DELAYS_PER_YIELD = 16;
 
     // Number of frames that can be skipped in any one animation loop
     private static final int MAX_FRAME_SKIPS = 5;
@@ -58,10 +58,10 @@ public abstract class RPanel extends JPanel implements Runnable {
     public RPanel(int pWidth, int pHeight) {
         fps = 40;
         calculatePeriod(fps);
-        this.pWidth = pWidth;
-        this.pHeight = pHeight;
-        pBackground = DBACKGROUND;
-        setBackground(pBackground);
+        this.panelWidth = pWidth;
+        this.panelHeight = pHeight;
+        this.panelBackground = DBACKGROUND;
+        setBackground(this.panelBackground);
         setPreferredSize(new Dimension(pWidth, pHeight));
         setFocusable(true);
         requestFocus();
@@ -71,12 +71,12 @@ public abstract class RPanel extends JPanel implements Runnable {
 
     /** Change the background color */
     public void setColor(Color color) {
-        pBackground = color;
+        this.panelBackground = color;
     }
 
     /** Calculates the period */
     public void calculatePeriod(int FPS) {
-        period = 1000000000L / FPS;
+        this.period = 1000000000L / FPS;
     }
 
     /** Wait for panel to be added to frame/applet before starting the game */
@@ -186,7 +186,7 @@ public abstract class RPanel extends JPanel implements Runnable {
                 excess -= sleepTime;
                 overSleepTime = 0L;
 
-                if (++noDelays >= NO_DELAYS_PER_YIELD) {
+                if (++noDelays >= DELAYS_PER_YIELD) {
                     Thread.yield();
                     noDelays = 0;
                 }
@@ -237,7 +237,7 @@ public abstract class RPanel extends JPanel implements Runnable {
     private void gameRender() {
         if (img == null) {
             // Create buffer
-            img = createImage(pWidth, pHeight);
+            img = createImage(panelWidth, panelHeight);
             if (img == null) {
                 System.out.println("Buffer is null");
                 return;
@@ -247,8 +247,8 @@ public abstract class RPanel extends JPanel implements Runnable {
         }
 
         // Clear the background
-        g.setColor(pBackground);
-        g.fillRect(0, 0, pWidth, pHeight);
+        g.setColor(this.panelBackground);
+        g.fillRect(0, 0, panelWidth, panelHeight);
 
         // Draw game components
         drawGame(g);
@@ -257,13 +257,13 @@ public abstract class RPanel extends JPanel implements Runnable {
     /** Return panel width */
     @Override
     public int getWidth() {
-        return pWidth;
+        return panelWidth;
     }
 
     /** Return panel height */
     @Override
     public int getHeight() {
-        return pHeight;
+        return panelHeight;
     }
 
     /** Draw the specific game components */
