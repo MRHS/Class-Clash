@@ -1,14 +1,12 @@
-package com.github.mrhs.classclash;
-
-import java.util.ArrayList;
+package com.github.mrhs.classclash.examples;
 
 import javax.swing.JFrame;
+
+import com.github.mrhs.classclash.Arena;
 
 public class Test {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 500;
-
-    private static ArrayList<Player> players = new ArrayList<Player>();
 
     public static void main(String[] args) {
         Arena arena = new Arena(WIDTH, HEIGHT);
