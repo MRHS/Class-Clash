@@ -23,20 +23,12 @@ public abstract class Player {
     private final int width = 10;
     private final int height = 10;
 
-    // Arena
-    private Arena arena;
-
     // Number of kills the player has gotten
     private int kills = 0;
 
     public Player(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    /** Sets the arena that the player is in */
-    public void setArena(Arena arena) {
-        this.arena = arena;
     }
 
     /** Adds a kill */
