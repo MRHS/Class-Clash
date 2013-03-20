@@ -82,7 +82,7 @@ public abstract class Player {
     /** Render the player */
     public void render(Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(x, y, width, height);
+        g.fillRect(this.x, this.y, width, height);
     }
 
     /** Turn to face the target player */
@@ -133,6 +133,34 @@ public abstract class Player {
 
         // Set the new direction
         setDirection(direction);
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    /**
+     * Sets the X location of the player.
+     * 
+     * @param x
+     *        The new X location.
+     */
+    void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * Sets the Y location of the player.
+     * 
+     * @param y
+     *        The new Y location.
+     */
+    void setY(int y) {
+        this.y = y;
     }
 
     protected abstract void runTurn(Arena arena);

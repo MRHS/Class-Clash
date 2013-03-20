@@ -37,6 +37,17 @@ public class Arena extends RPanel {
         return false;
     }
 
+    public void movePlayer(Player player, int xRelative, int yRelative) {
+        int playerX = player.getX();
+        int playerY = player.getY();
+
+        playerX += xRelative;
+        playerY += yRelative;
+
+        player.setX(playerX);
+        player.setY(playerY);
+    }
+
     /** Returns the distance between two locations */
     public int getDistance(Location location1, Location location2) {
         int x1 = location1.getX();
@@ -74,7 +85,7 @@ public class Arena extends RPanel {
 
     @Override
     public void updateGame() {
-        players.get(turnIndex).update();
+        players.get(turnIndex).runTurn(this);
 
         // Update turn index
         turnIndex++;

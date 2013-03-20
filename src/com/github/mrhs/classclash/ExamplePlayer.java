@@ -9,6 +9,7 @@ public class ExamplePlayer extends Player {
     @Override
     protected final void runTurn(Arena arena) {
         setDirection(Direction.SOUTH_EAST);
+        arena.movePlayer(this, 1, 1);
     }
 
 }
