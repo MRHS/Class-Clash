@@ -14,7 +14,6 @@ public abstract class Player {
     // Coords for Player
     private int x;
     private int y;
-    private final Location location;
 
     // X and Y Variation
     private int xVar = 0;
@@ -33,15 +32,6 @@ public abstract class Player {
     public Player(int x, int y) {
         this.x = x;
         this.y = y;
-        location = new Location(x, y);
-    }
-
-    /** Update the player */
-    public void update() {
-        x += xVar * speed;
-        y += yVar * speed;
-        location.update(x, y);
-        runTurn(arena);
     }
 
     /** Sets the arena that the player is in */
@@ -82,11 +72,6 @@ public abstract class Player {
         if (amount > 0) {
             this.life += amount;
         }
-    }
-
-    /** Get player's current location */
-    public Location getLocation() {
-        return location;
     }
 
     /** Return the number of kills the player has */
